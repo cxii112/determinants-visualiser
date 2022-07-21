@@ -48,17 +48,13 @@ export default function ListOptionPicker() {
     const [selected, setSelected] = useState(options[0]);
 
     const undefinedTextColor = "text-gray-500";
-    const definedTextColor = "text-black";
-    const tint = "lime";
-    const activeBgColor = `bg-${tint}-500`;
-    const activeTextColor = `text-${tint}-900`;
-    const activeOptionStyle = `${activeBgColor} ${activeTextColor}`;
+    const definedTextColor = "text-white";
 
     return (
         <Listbox value={selected} onChange={setSelected}>
             <div className="relative mt-1">
                 <Listbox.Button
-                    className="relative w-fit cursor-default rounded-lg bg-gray-100 p-2 px-4 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                    className="relative w-fit cursor-default rounded-lg bg-zinc-800 p-2 px-4 text-center focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                     <span className={`block truncate ${
                         selected.value === undefined ? undefinedTextColor : definedTextColor
                     }`}>
@@ -72,15 +68,15 @@ export default function ListOptionPicker() {
                     leaveTo="opacity-0"
                 >
                     <Listbox.Options
-                        className="overflow-auto z-10 absolute mt-1 w-fit rounded-md bg-gray-100 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        className="overflow-auto z-10 absolute mt-1 w-fit rounded-md bg-zinc-800 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {options.map((option, index) => (
                             <Listbox.Option
                                 key={index}
                                 className={({active, selected}) =>
                                     `relative cursor-default select-none py-1 px-3 ${
-                                        active ? "bg-lime-200 text-black" : "text-gray-900"
+                                        active ? "bg-purple-600 text-white" : "text-gray-900"
                                     } ${
-                                        selected ? "bg-lime-100" : ""
+                                        selected ? "bg-purple-800 text-white" : ""
                                     }`
                                 }
                                 value={option}
@@ -91,7 +87,7 @@ export default function ListOptionPicker() {
                           className={`block ${
                               selected ? "text-black" : ""
                           } ${
-                              active ? "text-black" : "text-gray-500"
+                              active ? "" : "text-gray-500"
                           }`}
                       >
                         {option.symbol}

@@ -1,5 +1,5 @@
 import DeterminantCell from "./DeterminantCell";
-import ListOptionPicker from "./ListOptionPicker";
+import ListOptionPicker from "../ListOptionPicker";
 
 export default function DeterminantMenu() {
   let cells = [];
@@ -10,7 +10,7 @@ export default function DeterminantMenu() {
     </DeterminantCell>)
   }
   return <>
-    <div className="aspect-square border-l-2 border-r-2 border-black min-w-fit flex justify-center align-middle py-1">
+    <div className="aspect-square border-l-2 border-r-2 border-white min-w-fit flex justify-center align-middle py-1">
       <div className="grid grid-cols-3 gap-x-4 gap-y-2 px-2">
         {cells}
       </div>

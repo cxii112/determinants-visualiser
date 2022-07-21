@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className="fixed inset-0 flex items-center justify-center">
+      <div className="fixed inset-0 flex items-center justify-center bg-zinc-900">
         <DeterminantMenu/>
       </div>
     </div>
