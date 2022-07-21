@@ -1,7 +1,12 @@
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {Listbox, Transition} from "@headlessui/react";
 
-const options = [
+export interface ListOption {
+    value: undefined | number;
+    symbol: string;
+}
+
+export const options: ListOption[] = [
     {
         value: undefined,
         symbol: "*"
@@ -44,11 +49,23 @@ const options = [
     },
 ];
 
-export default function ListOptionPicker() {
-    const [selected, setSelected] = useState(options[0]);
 
+export interface ListOptionsPickerParams {
+    index: number,
+    options: ListOption[],
+    callback: (key: number, value: number | undefined) => void
+}
+
+export default function ListOptionPicker(params: ListOptionsPickerParams) {
     const undefinedTextColor = "text-gray-500";
     const definedTextColor = "text-white";
+
+    const [selected, setSelected] = useState(params.options[0]);
+
+    useEffect(() => {
+        params.callback(params.index, selected.value);
+    }, [selected]);
+
 
     return (
         <Listbox value={selected} onChange={setSelected}>
@@ -85,7 +102,7 @@ export default function ListOptionPicker() {
                                     <>
                       <span
                           className={`block ${
-                              selected ? "text-black" : ""
+                              selected ? "text-white" : "text-gray-500"
                           } ${
                               active ? "" : "text-gray-500"
                           }`}
