@@ -69,10 +69,10 @@ export default function ListOptionPicker(params: ListOptionsPickerParams) {
 
     return (
         <Listbox value={selected} onChange={setSelected}>
-            <div className="relative mt-1">
+            <div className="relative aspect-square">
                 <Listbox.Button
                     className="relative w-fit cursor-default rounded-lg bg-zinc-800 p-2 px-4 text-center focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                    <span className={`block truncate ${
+                    <span className={` truncate ${
                         selected.value === undefined ? undefinedTextColor : definedTextColor
                     }`}>
                         {selected.symbol}

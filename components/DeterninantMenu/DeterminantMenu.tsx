@@ -1,25 +1,44 @@
 import DeterminantCell from "./DeterminantCell";
 import ListOptionPicker, {options} from "../ListOptionPicker";
 import {UpdateMaskContext} from "../../context/UpdateMaskContext";
-import {useContext} from "react";
+import {ReactElement, useContext} from "react";
 
 export default function DeterminantMenu() {
-    let cells = [];
-    const updateMaskContext = useContext(UpdateMaskContext);
-    for (let i = 0; i < 9; i++) {
-        cells.push(<DeterminantCell className={"w-fit h-fit"} key={i}>
-            <ListOptionPicker index={i}
-                              options={options}
-                              callback={updateMaskContext}
-            />
-        </DeterminantCell>);
+  const updateMaskContext = useContext(UpdateMaskContext);
+
+  function makeTable() {
+    let cells: ReactElement[] = [];
+
+    for (let i = 0; i < 3; i++) {
+      let row: ReactElement[] = [];
+      for (let j = 0; j < 3; j++) {
+        const key = i* 3 + j;
+        row.push(
+            <td>
+              <DeterminantCell className={"aspect-square h-fit"} key={key}>
+                <ListOptionPicker index={key}
+                                  options={options}
+                                  callback={updateMaskContext}
+                />
+              </DeterminantCell>
+            </td>
+        );
+      }
+      cells.push(
+          <tr>
+            {row}
+          </tr>
+      )
     }
-    return <>
-        <div
-            className="aspect-square border-l-2 border-r-2 border-white min-w-fit flex justify-center align-middle py-1">
-            <div className="grid grid-cols-3 gap-x-4 gap-y-2 px-2">
-                {cells}
-            </div>
-        </div>
-    </>;
+    return cells;
+  }
+
+  return <>
+    <div
+        className="relative w-fit h-fit border-l-2 border-r-2 border-white py-1 px-2">
+      <table className="table-auto">
+        <tbody>{makeTable()}</tbody>
+      </table>
+    </div>
+  </>;
 }
