@@ -14,30 +14,6 @@ export default function Table(params: MatchedTableParams) {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(start + shift);
 
-  function countPositives() {
-    let positives = 0;
-    params.list.map(value => {
-      if (value.Det > 0) positives++;
-    });
-    return positives;
-  }
-
-  function countNegatives() {
-    let negatives = 0;
-    params.list.map(value => {
-      if (value.Det < 0) negatives++;
-    });
-    return negatives;
-  }
-
-  function countDraws() {
-    let draws = 0;
-    params.list.map(value => {
-      if (value.Det === 0) draws++;
-    });
-    return draws;
-  }
-
   function updateStart(value: number) {
     if (value < 0 || value > maxStart || isNaN(value)) return;
     setStart(value);
@@ -53,20 +29,6 @@ export default function Table(params: MatchedTableParams) {
 
 
   return <>
-    <div>
-      <span className={"text-white p-2 rounded-md bg-purple-700 w-fit"}>
-      Совпадений: {params.list.length}
-      </span>
-      <span className={"text-white p-2 w-fit"}>
-        Положительные: {countPositives()}
-      </span>
-      <span className={"text-white p-2 w-fit"}>
-        Отрицательные: {countNegatives()}
-      </span>
-      <span className={"text-white p-2 w-fit"}>
-        Ничьи: {countDraws()}
-      </span>
-    </div>
     <div>
       <span className={"text-white"}>Показывается: </span>
       <SliceSwitcher start={start} end={end} callback={updateStart}/>

@@ -1,10 +1,11 @@
-import DeterminantCell from "../Determinant/DeterminantCell";
+import DeterminantCell from "./DeterminantCell";
 import ListOptionPicker, {options} from "../ListOptionPicker";
-import {UpdateMaskContext} from "../../context/UpdateMaskContext";
+import {UpdateFilterOptionsContext} from "../../context/UpdateFilterOptionsContext";
 import {ReactElement, useContext} from "react";
+import SignPicker from "../SignPicker";
 
 export default function Menu() {
-  const updateMaskContext = useContext(UpdateMaskContext);
+  const optionsContext = useContext(UpdateFilterOptionsContext);
 
   function makeTable() {
     let cells: ReactElement[] = [];
@@ -18,7 +19,7 @@ export default function Menu() {
               <DeterminantCell className={"aspect-square h-fit"} key={key}>
                 <ListOptionPicker index={key}
                                   options={options}
-                                  callback={updateMaskContext}
+                                  callback={optionsContext.maskCallback}
                 />
               </DeterminantCell>
             </td>
@@ -33,10 +34,13 @@ export default function Menu() {
     return cells;
   }
 
-  return <div
-      className="relative w-fit h-fit border-l-2 border-r-2 border-white py-1 px-2">
-    <table className="table-auto">
-      <tbody>{makeTable()}</tbody>
-    </table>
+  return <div className={"flex flex-row"}>
+    <div
+        className="relative w-fit h-fit border-l-2 border-r-2 border-white py-1 px-2">
+      <table className="table-auto">
+        <tbody>{makeTable()}</tbody>
+      </table>
+    </div>
+    <SignPicker callback={optionsContext.signCallback}/>
   </div>;
 }
