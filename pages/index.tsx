@@ -1,12 +1,19 @@
 import type {NextPage} from "next";
 import data from "../public/GamesData.json";
 import {useEffect, useState} from "react";
-import DeterminantMenu from "../components/DeterninantMenu/DeterminantMenu";
+import Menu from "../components/DeterninantMenu/Menu";
 import {UpdateMaskContext} from "../context/UpdateMaskContext";
+import Table from "../components/MatchedTable/Table";
+import { MaskContext } from "../context/MaskContext";
+
+export interface DeterminantData {
+    Key: string;
+    Det: number;
+}
 
 const Home: NextPage = () => {
-    const determinantsData = (data as {Key:string, Det:number}[]);
-    const [mask, setMask] = useState(".........");
+    const determinantsData = (data as DeterminantData[]);
+    const [mask, setMask] = useState("123456789");
     const [filtered, setFiltered] = useState(determinantsData);
 
     function updateMask(key: number, value: number | undefined) {
@@ -29,13 +36,15 @@ const Home: NextPage = () => {
         filterDataByMask();
     }, [mask]);
 
-
     return (
-        <div>
-            <div className="fixed inset-0 flex items-center justify-center bg-zinc-900">
+        <div className={"bg-zinc-900 min-h-screen pt-10"}>
+            <div className="p-2 w-full h-fit px-20 space-y-6">
                 <UpdateMaskContext.Provider value={updateMask}>
-                    <DeterminantMenu/>
+                    <Menu/>
                 </UpdateMaskContext.Provider>
+                <MaskContext.Provider value={mask}>
+                    <Table list={filtered} />
+                </MaskContext.Provider>
             </div>
         </div>
     );
